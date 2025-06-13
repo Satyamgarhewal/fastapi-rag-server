@@ -1,0 +1,7 @@
+node_modules
+.env
+venv
+.serverless
+__pycache__/
+src/app/libraries/__pycache__/
+src/functions/users/__pycache__/

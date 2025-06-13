@@ -1,0 +1,35 @@
+# serverless.yml
+service: my-fastapi-service
+
+frameworkVersion: "4" # Or higher, depending on your Serverless Framework version
+
+provider:
+  name: aws
+  runtime: python3.9 # Or your preferred Python version
+  stage: dev # Default stage
+  region: ap-south-1 # Your preferred AWS region
+  memorySize: 128 # Optional: Adjust as needed
+  timeout: 30 # Optional: Adjust as needed (seconds)
+  environment:
+    STAGE: ${sls:stage}
+    CHROMA_API_KEY: ${env:CHROMA_API_KEY}
+    CHROMA_HOST: ${env:CHROMA_HOST}
+    CHROMA_DATABASE: ${env:CHROMA_DATABASE}
+    OPEN_AI_API_KEY: ${env:OPEN_AI_API_KEY}
+
+functions:
+  api:
+    handler: main.handler # Refers to the `handler` object in `main.py`
+    events:
+      - httpApi: "*" # Catch all HTTP requests and route them to this Lambda
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip:
+      true # Set to true if you encounter issues with native dependencies (e.g., pandas, numpy)
+      # Requires Docker to be running if true.
+    zip: true # Package dependencies into the Lambda deployment package
+    slim: false # Reduces package size by stripping unnecessary files

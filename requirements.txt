@@ -1,0 +1,10 @@
+# requirements.txt
+fastapi
+uvicorn
+mangum
+chromadb
+sentence-transformers
+openai
+pydantic
+numpy
+onnxruntime
