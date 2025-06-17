@@ -8,3 +8,4 @@ openai
 pydantic
 numpy
 onnxruntime
+PyPDF2
