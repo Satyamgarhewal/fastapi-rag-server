@@ -9,3 +9,4 @@ pydantic
 numpy
 onnxruntime
 PyPDF2
+redis
